@@ -1,0 +1,13 @@
+.hidden {
+  display: none;
+}
+
+.vkeyboard__body {
+  width: 700px;
+  background-color: gray;
+}
+
+.vkeyboard__row {
+  display: flex;
+  gap: 10px;
+}
