@@ -140,7 +140,7 @@ const createElement = () => {
 
   const capsLock = createKey('capsLock');
   const keyA = createKey('keyA', 'a','A','A','a','ф','Ф','Ф','ф');
-  const keyS = createKey('keyS"', 's','S','S','s','ы','Ы','Ы','ы');
+  const keyS = createKey('keyS', 's','S','S','s','ы','Ы','Ы','ы');
   const keyD = createKey('keyD', 'd','D','D','d','в','В','В','в');
   const keyF = createKey('keyF', 'f','F','F','f','а','А','А','а');
   const keyG = createKey('keyG', 'g','G','G','g','п','П','П','п');
@@ -165,7 +165,7 @@ const createElement = () => {
   const keyB = createKey('keyB', 'b','B','B','b','и','И','И','и');
   const keyN = createKey('keyN', 'n','N','N','n','т','Т','Т','т');
   const keyM = createKey('keyM', 'm','M','M','m','ь','Ь','Ь','ь');
-  const comma = createKey('сomma', ',','<',',','<','б','Б','Б','б');
+  const comma = createKey('comma', ',', '<', ',','<','б','Б','Б','б');
   const period = createKey('period', '.','>','.','>','ю','Ю','Ю','ю');
   const slash = createKey('slash', '/','?','/','?','.',',','.',',');
   const arrowUp = createKey('▲');
@@ -210,3 +210,34 @@ const createElement = () => {
 }
 
 createElement();
+
+
+
+
+
+
+
+const textarea = document.querySelector('.vkeyboard__textarea');
+let text = '';
+
+document.onkeypress = function (event) {
+  
+  let letter = event.code;
+
+  if (letter === 'Space') {
+    text += ' ';   
+  }
+  else {
+    letter = letter.replace(letter[0], letter[0].toLowerCase());
+    
+    let span = document.querySelector(`.${letter}`);
+  
+    letter = span.querySelector('span:not(.hidden)');  
+  
+    text += letter.innerText;
+  }
+
+  //console.log(letter.innerText);
+
+  textarea.innerText = text;  
+}
