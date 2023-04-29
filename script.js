@@ -4,20 +4,15 @@ vKeyboard.classList.add('vkeyboard');
 
 document.body.append(vKeyboard);
 
+// Функции создания
 const createKey = function (name, sign1, sign2, sign3, sign4, sign5, sign6, sign7, sign8) {
   
   if (arguments.length != 9) {
-    if (name === 'space') {
-      [sign1, sign2, sign3, sign4, sign5, sign6, sign7, sign8] = [' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '];
-    }
-    else {
       [sign1, sign2, sign3, sign4, sign5, sign6, sign7, sign8] = [name, name, name, name, name, name, name, name];
-    }
   }
   
   const block = document.createElement('p');
 
-  //console.log(name);
   block.classList.add('vkeyboard__key', name);
 
   const spanEng = document.createElement('span');
@@ -131,7 +126,7 @@ const createElement = () => {
   const bracketLeft = createKey('bracketLeft', '[','{','[','{','х','Х','Х','х');
   const bracketRight = createKey('bracketRight', ']','}',']','}','ъ','Ъ','Ъ','ъ');
   const backslash = createKey('backslash', '\\','|','\\','|','\\','/','\\','/');
-  const del = createKey('del');
+  const del = createKey('delete');
 
   vkeyboardRow2.append(tab, keyQ, keyW, keyE, keyR, keyT, keyY, keyU, keyI, keyO, keyP, bracketLeft, bracketRight, backslash, del);
 
@@ -157,7 +152,7 @@ const createElement = () => {
   const vkeyboardRow4 = document.createElement('div');
   vkeyboardRow4.classList.add('vkeyboard__row')
 
-  const shift = createKey('shift');
+  const shiftLeft = createKey('shiftLeft', 'Shift', 'Shift', 'Shift', 'Shift', 'Shift', 'Shift', 'Shift', 'Shift');
   const keyZ = createKey('keyZ', 'z','Z','Z','z','я','Я','Я','я');
   const keyX= createKey('keyX', 'x','X','X','x','ч','Ч','Ч','ч');
   const keyC = createKey('keyC', 'c','C','C','c','с','С','С','с');
@@ -168,25 +163,25 @@ const createElement = () => {
   const comma = createKey('comma', ',', '<', ',','<','б','Б','Б','б');
   const period = createKey('period', '.','>','.','>','ю','Ю','Ю','ю');
   const slash = createKey('slash', '/','?','/','?','.',',','.',',');
-  const arrowUp = createKey('▲');
-  //shift = createKey('shift');
+  const arrowUp = createKey('arrowUp', '▲', '▲', '▲', '▲', '▲', '▲', '▲', '▲');
+  const shiftRight = createKey('shiftRight', 'Shift', 'Shift', 'Shift', 'Shift', 'Shift', 'Shift', 'Shift', 'Shift');
 
-  vkeyboardRow4.append(shift, keyZ, keyX, keyC, keyV, keyB, keyN, keyM, comma, period, slash, arrowUp, shift);
+  vkeyboardRow4.append(shiftLeft, keyZ, keyX, keyC, keyV, keyB, keyN, keyM, comma, period, slash, arrowUp, shiftRight);
   
   const vkeyboardRow5 = document.createElement('div');
   vkeyboardRow5.classList.add('vkeyboard__row')
   
-  const ctrl = createKey('ctrl');
-  const win = createKey('win');
-  const alt = createKey('alt');
-  const space = createKey('space');
-  //alt = createKey('alt');
-  const arrowLeft = createKey('◄');
-  const arrowDown = createKey('▼');
-  const arrowRight = createKey('►');
-  //const ctrl = createKey('ctrl');
+  const controlLeft = createKey('controlLeft', 'Ctrl', 'Ctrl', 'Ctrl', 'Ctrl', 'Ctrl', 'Ctrl', 'Ctrl', 'Ctrl');
+  const metaLeft = createKey('metaLeft', 'Win', 'Win', 'Win', 'Win', 'Win', 'Win', 'Win', 'Win');
+  const altLeft = createKey('altLeft', 'Alt', 'Alt', 'Alt', 'Alt', 'Alt', 'Alt', 'Alt', 'Alt');
+  const space = createKey('space', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ');
+  const altRight = createKey('altRight', 'Alt', 'Alt', 'Alt', 'Alt', 'Alt', 'Alt', 'Alt', 'Alt' );
+  const arrowLeft = createKey('arrowLeft', '◄', '◄', '◄', '◄', '◄', '◄', '◄', '◄' );
+  const arrowDown = createKey('arrowDown', '▼', '▼', '▼', '▼', '▼', '▼', '▼', '▼');
+  const arrowRight = createKey('arrowRight', '►', '►', '►', '►', '►', '►', '►', '►');
+  const controlRight = createKey('controlRight', 'Ctrl', 'Ctrl', 'Ctrl', 'Ctrl', 'Ctrl', 'Ctrl', 'Ctrl', 'Ctrl');
 
-  vkeyboardRow5.append(ctrl, win, alt, space, alt, arrowLeft, arrowDown, arrowRight, ctrl);
+  vkeyboardRow5.append(controlLeft, metaLeft, altLeft, space, altRight, arrowLeft, arrowDown, arrowRight, controlRight);
 
   vkeyboardBody.append(vkeyboardRow1);
   vkeyboardBody.append(vkeyboardRow2);
@@ -211,33 +206,45 @@ const createElement = () => {
 
 createElement();
 
-
-
-
-
-
-
+// Функции нажатий
 const textarea = document.querySelector('.vkeyboard__textarea');
 let text = '';
 
-document.onkeypress = function (event) {
-  
-  let letter = event.code;
+const сlicking = document.onkeydown = function (event) {
 
-  if (letter === 'Space') {
+  let letter;
+
+  if (event.target.classList[1]) {
+    letter = event.target.classList[1];
+  }
+  else if (event.target.closest('.vkeyboard__key')) {
+    letter = event.target.closest('.vkeyboard__key').classList[1];
+  }
+  else {
+    letter = event.code;
+  }
+  console.log(letter)
+  letter = letter.replace(letter[0], letter[0].toLowerCase());
+    
+  let span = document.querySelector(`.${letter}`);
+
+  span.classList.add('vkeyboard__key_activ');
+
+  setTimeout(() => span.classList.remove('vkeyboard__key_activ'), 500);
+
+  if (letter === 'space') {
     text += ' ';   
   }
   else {
-    letter = letter.replace(letter[0], letter[0].toLowerCase());
-    
-    let span = document.querySelector(`.${letter}`);
-  
     letter = span.querySelector('span:not(.hidden)');  
-  
     text += letter.innerText;
   }
 
-  //console.log(letter.innerText);
+  textarea.innerText = text;   
+}
 
-  textarea.innerText = text;  
+document.querySelector('.vkeyboard__body').onclick = function (event) {
+  if (event.target.classList[0] === 'vkeyboard__key' || event.target.closest('.vkeyboard__key')) {
+    сlicking(event); 
+  }
 }

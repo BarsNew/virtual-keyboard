@@ -3,7 +3,7 @@
 }
 
 .vkeyboard__body {
-  width: 700px;
+  width: 800px;
   background-color: gray;
 }
 
@@ -11,3 +11,18 @@
   display: flex;
   gap: 10px;
 }
+
+.vkeyboard__key {
+  width: 40px;
+  height: 40px;
+  background: #444;
+  text-align: center;
+  color: #fff;
+  border-radius: 3px;
+  cursor: pointer;
+  line-height: 40px;
+}
+
+.vkeyboard__key_activ {
+  background-color: greenyellow;
+} 
