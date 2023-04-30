@@ -209,7 +209,8 @@ createElement();
 
 let lang = localStorage.getItem('language');
 let activ = false;
-
+let capsLockActive = false;
+let shiftActive = false;
 
 // Функции нажатий
 const textarea = document.querySelector('.vkeyboard__textarea');
@@ -261,7 +262,7 @@ document.onkeydown = function (event) {
     return false;
   } 
 
-  delClassActiv(span);
+  if (letter !== 'CapsLock') delClassActiv(span);
 
   if (letter  === 'Backspace') { 
     event.preventDefault();
@@ -358,21 +359,31 @@ document.onkeydown = function (event) {
   }
   else if (letter  === 'ArrowDown') {
     textarea.selectionStart = textarea.selectionEnd = text.length;  
+
     return false;
   }
   else if (letter  === 'ArrowUp') {
     textarea.selectionStart = textarea.selectionEnd = 0;   
     return false;
   }
-  else if (letter  === 'MetaLeft' || letter  === 'ControlLeft' || letter  === 'AltLeft' || letter  === 'CapsLock') {
+  else if (letter  === 'MetaLeft' || letter  === 'ControlLeft' || letter  === 'AltLeft') {
+    return false;
+  }
+  else if (letter  === 'CapsLock') {
+    span.classList.toggle('vkeyboard__key_activ');
+
     return false;
   }
   else {
-    letter = span.querySelector('span:not(.hidden)');  
-    text += letter.innerText;
-  }
+    let position = textarea.selectionStart; 
+    const selectionStart = textarea.selectionStart;
+    const selectionEnd = textarea.selectionEnd;
 
-  textarea.value = text;   
+    letter = span.querySelector('span:not(.hidden)');  
+    text = text.slice(0, selectionStart) + letter.innerText + text.slice(selectionStart);
+    textarea.value = text; 
+    textarea.selectionStart = textarea.selectionEnd = position + 1;     
+  }   
 }
 
 
@@ -418,7 +429,6 @@ document.addEventListener('keydown', function(event) {
       });
       lang = 'rus';
       localStorage.setItem('language', 'rus');
-      console.log(lang);
     } 
   }
 });
@@ -485,8 +495,7 @@ document.addEventListener('keydown', function(event) {
 
 window.addEventListener('load', function() {
   let lang = localStorage.getItem('language');
-  //console.log(activ);
-  //console.log(lang);
+
   if (lang === 'rus') {
     vKeyboard.querySelectorAll('.eng').forEach(item => {
       item.classList.add('hidden');
@@ -524,6 +533,31 @@ window.addEventListener('load', function() {
       }
     });
   }
-  //console.log(activ);
- // console.log(lang);
 }); 
+
+
+document.addEventListener('keydown', function(event) {
+  if (event.getModifierState('Shift')) {
+    vKeyboard.querySelector('.shiftLeft').classList.add('vkeyboard__key_activ');
+    if (!shiftActive) {
+      const ev = new KeyboardEvent('keydown', { code: 'CapsLock' });
+
+      document.dispatchEvent(ev);
+      shiftActive = true;
+      vKeyboard.querySelector('.CapsLock').classList.toggle('vkeyboard__key_activ');
+    }
+  }
+});
+
+document.addEventListener('keyup', function(event) {
+  if (event.key === 'Shift') {
+    vKeyboard.querySelector('.shiftLeft').classList.remove('vkeyboard__key_activ');
+    if (shiftActive) {
+      const ev = new KeyboardEvent('keydown', { code: 'CapsLock' });
+
+      document.dispatchEvent(ev);
+      shiftActive = false;
+      vKeyboard.querySelector('.CapsLock').classList.toggle('vkeyboard__key_activ');
+    }
+  }
+});
