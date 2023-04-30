@@ -7,6 +7,11 @@
   background-color: gray;
 }
 
+.vkeyboard__textarea {
+  width: 795px;
+  height: 50px;
+}
+
 .vkeyboard__row {
   display: flex;
   gap: 10px;

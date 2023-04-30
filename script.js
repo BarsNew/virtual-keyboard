@@ -91,20 +91,20 @@ const createElement = () => {
 
   vkeyboardRow1.classList.add('vkeyboard__row');
 
-  const backquote = createKey('backquote', '`','~','`','~','ё','Ё','Ё','ё');
-  const digit1 = createKey('digit1', '1','!','1','!','1','!','1','!');
-  const digit2 = createKey('digit2', '2','"','2','"','2','@','2','@');
-  const digit3 = createKey('digit3', '3','№','3','№','3','#','3','#');
-  const digit4 = createKey('digit4', '4','$','4','$','4',';','4',';');
-  const digit5 = createKey('digit5', '5','%','5','%','5','%','5','%');
-  const digit6 = createKey('digit6', '6','^','6','^','6',':','6',':');
-  const digit7 = createKey('digit7', '7','&','7','&','7','?','7','?');
-  const digit8 = createKey('digit8', '8','*','8','*','8','*','8','*');
-  const digit9 = createKey('digit9', '9','(','9','(','9','(','9','(');
-  const digit0 = createKey('digit0', '0','(','0',')','0',')','0',')');
-  const minus = createKey('minus', '_','-','_','-','_','-','_','-');
-  const equal = createKey('equal', '=','+','=','+','=','+','=','+');
-  const backspace = createKey('backspace');
+  const backquote = createKey('Backquote', '`','~','`','~','ё','Ё','Ё','ё');
+  const digit1 = createKey('Digit1', '1','!','1','!','1','!','1','!');
+  const digit2 = createKey('Digit2', '2','"','2','"','2','@','2','@');
+  const digit3 = createKey('Digit3', '3','№','3','№','3','#','3','#');
+  const digit4 = createKey('Digit4', '4','$','4','$','4',';','4',';');
+  const digit5 = createKey('Digit5', '5','%','5','%','5','%','5','%');
+  const digit6 = createKey('Digit6', '6','^','6','^','6',':','6',':');
+  const digit7 = createKey('Digit7', '7','&','7','&','7','?','7','?');
+  const digit8 = createKey('Digit8', '8','*','8','*','8','*','8','*');
+  const digit9 = createKey('Digit9', '9','(','9','(','9','(','9','(');
+  const digit0 = createKey('Digit0', '0','(','0',')','0',')','0',')');
+  const minus = createKey('Minus', '_','-','_','-','_','-','_','-');
+  const equal = createKey('Equal', '=','+','=','+','=','+','=','+');
+  const backspace = createKey('Backspace');
  
   vkeyboardRow1.append(backquote, digit1, digit2, digit3, digit4, digit5, digit6, digit7, digit8, digit9, digit0, minus, equal, backspace);
   
@@ -112,40 +112,40 @@ const createElement = () => {
 
   vkeyboardRow2.classList.add('vkeyboard__row')
 
-  const tab = createKey('tab');
-  const keyQ = createKey('keyQ', 'q','Q','Q','q','й','Й','Й','й');
-  const keyW = createKey('keyW', 'w','W','W','w','ц','Ц','Ц','ц');
-  const keyE = createKey('keyE', 'e','E','E','e','у','У','У','у');
-  const keyR = createKey('keyR', 'r','R','R','r','к','К','К','к');
-  const keyT = createKey('keyT', 't','T','T','t','е','Е','Е','е');
-  const keyY = createKey('keyY', 'y','Y','Y','y','н','Н','Н','н');
-  const keyU = createKey('keyU', 'u','U','U','u','г','Г','Г','г');
-  const keyI = createKey('keyI', 'i','I','I','i','ш','Ш','Ш','ш');
-  const keyO = createKey('keyO', 'o','O','O','o','щ','Щ','Щ','щ');
-  const keyP = createKey('keyP', 'p','P','P','p','з','З','З','з');
-  const bracketLeft = createKey('bracketLeft', '[','{','[','{','х','Х','Х','х');
-  const bracketRight = createKey('bracketRight', ']','}',']','}','ъ','Ъ','Ъ','ъ');
-  const backslash = createKey('backslash', '\\','|','\\','|','\\','/','\\','/');
-  const del = createKey('delete');
+  const tab = createKey('Tab', 'Tab', 'Tab', 'Tab', 'Tab', 'Tab', 'Tab', 'Tab', 'Tab' );
+  const keyQ = createKey('KeyQ', 'q','Q','Q','q','й','Й','Й','й');
+  const keyW = createKey('KeyW', 'w','W','W','w','ц','Ц','Ц','ц');
+  const keyE = createKey('KeyE', 'e','E','E','e','у','У','У','у');
+  const keyR = createKey('KeyR', 'r','R','R','r','к','К','К','к');
+  const keyT = createKey('KeyT', 't','T','T','t','е','Е','Е','е');
+  const keyY = createKey('KeyY', 'y','Y','Y','y','н','Н','Н','н');
+  const keyU = createKey('KeyU', 'u','U','U','u','г','Г','Г','г');
+  const keyI = createKey('KeyI', 'i','I','I','i','ш','Ш','Ш','ш');
+  const keyO = createKey('KeyO', 'o','O','O','o','щ','Щ','Щ','щ');
+  const keyP = createKey('KeyP', 'p','P','P','p','з','З','З','з');
+  const bracketLeft = createKey('BracketLeft', '[','{','[','{','х','Х','Х','х');
+  const bracketRight = createKey('VracketRight', ']','}',']','}','ъ','Ъ','Ъ','ъ');
+  const backslash = createKey('Vackslash', '\\','|','\\','|','\\','/','\\','/');
+  const del = createKey('Delete');
 
   vkeyboardRow2.append(tab, keyQ, keyW, keyE, keyR, keyT, keyY, keyU, keyI, keyO, keyP, bracketLeft, bracketRight, backslash, del);
 
   const vkeyboardRow3 = document.createElement('div');
   vkeyboardRow3.classList.add('vkeyboard__row')
 
-  const capsLock = createKey('capsLock');
-  const keyA = createKey('keyA', 'a','A','A','a','ф','Ф','Ф','ф');
-  const keyS = createKey('keyS', 's','S','S','s','ы','Ы','Ы','ы');
-  const keyD = createKey('keyD', 'd','D','D','d','в','В','В','в');
-  const keyF = createKey('keyF', 'f','F','F','f','а','А','А','а');
-  const keyG = createKey('keyG', 'g','G','G','g','п','П','П','п');
-  const keyH = createKey('keyH', 'h','H','H','h','р','Р','Р','р');
-  const keyJ = createKey('keyJ', 'j','J','J','j','о','О','О','о');
-  const keyK = createKey('keyK', 'k','K','K','k','л','Л','Л','л');
-  const keyL = createKey('keyL', 'l','L','L','l','д','Д','Д','д');
-  const semicolon = createKey('semicolon', ';',':',';',':','ж','Ж','Ж','ж');
-  const quote = createKey('quote', "'",'"',"'",'"','э','Э','Э','э');
-  const enter = createKey('enter');
+  const capsLock = createKey('CapsLock');
+  const keyA = createKey('KeyA', 'a','A','A','a','ф','Ф','Ф','ф');
+  const keyS = createKey('KeyS', 's','S','S','s','ы','Ы','Ы','ы');
+  const keyD = createKey('KeyD', 'd','D','D','d','в','В','В','в');
+  const keyF = createKey('KeyF', 'f','F','F','f','а','А','А','а');
+  const keyG = createKey('KeyG', 'g','G','G','g','п','П','П','п');
+  const keyH = createKey('KeyH', 'h','H','H','h','р','Р','Р','р');
+  const keyJ = createKey('KeyJ', 'j','J','J','j','о','О','О','о');
+  const keyK = createKey('KeyK', 'k','K','K','k','л','Л','Л','л');
+  const keyL = createKey('KeyL', 'l','L','L','l','д','Д','Д','д');
+  const semicolon = createKey('Semicolon', ';',':',';',':','ж','Ж','Ж','ж');
+  const quote = createKey('Quote', "'",'"',"'",'"','э','Э','Э','э');
+  const enter = createKey('Enter');
 
   vkeyboardRow3.append(capsLock, keyA, keyS, keyD, keyF, keyG, keyH, keyJ, keyK, keyL, semicolon, quote, enter);
  
@@ -153,33 +153,33 @@ const createElement = () => {
   vkeyboardRow4.classList.add('vkeyboard__row')
 
   const shiftLeft = createKey('shiftLeft', 'Shift', 'Shift', 'Shift', 'Shift', 'Shift', 'Shift', 'Shift', 'Shift');
-  const keyZ = createKey('keyZ', 'z','Z','Z','z','я','Я','Я','я');
-  const keyX= createKey('keyX', 'x','X','X','x','ч','Ч','Ч','ч');
-  const keyC = createKey('keyC', 'c','C','C','c','с','С','С','с');
-  const keyV = createKey('keyV', 'v','V','V','v','м','М','М','м');
-  const keyB = createKey('keyB', 'b','B','B','b','и','И','И','и');
-  const keyN = createKey('keyN', 'n','N','N','n','т','Т','Т','т');
-  const keyM = createKey('keyM', 'm','M','M','m','ь','Ь','Ь','ь');
-  const comma = createKey('comma', ',', '<', ',','<','б','Б','Б','б');
-  const period = createKey('period', '.','>','.','>','ю','Ю','Ю','ю');
-  const slash = createKey('slash', '/','?','/','?','.',',','.',',');
-  const arrowUp = createKey('arrowUp', '▲', '▲', '▲', '▲', '▲', '▲', '▲', '▲');
-  const shiftRight = createKey('shiftRight', 'Shift', 'Shift', 'Shift', 'Shift', 'Shift', 'Shift', 'Shift', 'Shift');
+  const keyZ = createKey('KeyZ', 'z','Z','Z','z','я','Я','Я','я');
+  const keyX= createKey('KeyX', 'x','X','X','x','ч','Ч','Ч','ч');
+  const keyC = createKey('KeyC', 'c','C','C','c','с','С','С','с');
+  const keyV = createKey('KeyV', 'v','V','V','v','м','М','М','м');
+  const keyB = createKey('KeyB', 'b','B','B','b','и','И','И','и');
+  const keyN = createKey('KeyN', 'n','N','N','n','т','Т','Т','т');
+  const keyM = createKey('KeyM', 'm','M','M','m','ь','Ь','Ь','ь');
+  const comma = createKey('Comma', ',', '<', ',','<','б','Б','Б','б');
+  const period = createKey('Period', '.','>','.','>','ю','Ю','Ю','ю');
+  const slash = createKey('Slash', '/','?','/','?','.',',','.',',');
+  const arrowUp = createKey('ArrowUp', '▲', '▲', '▲', '▲', '▲', '▲', '▲', '▲');
+  const shiftRight = createKey('ShiftRight', 'Shift', 'Shift', 'Shift', 'Shift', 'Shift', 'Shift', 'Shift', 'Shift');
 
   vkeyboardRow4.append(shiftLeft, keyZ, keyX, keyC, keyV, keyB, keyN, keyM, comma, period, slash, arrowUp, shiftRight);
   
   const vkeyboardRow5 = document.createElement('div');
   vkeyboardRow5.classList.add('vkeyboard__row')
   
-  const controlLeft = createKey('controlLeft', 'Ctrl', 'Ctrl', 'Ctrl', 'Ctrl', 'Ctrl', 'Ctrl', 'Ctrl', 'Ctrl');
-  const metaLeft = createKey('metaLeft', 'Win', 'Win', 'Win', 'Win', 'Win', 'Win', 'Win', 'Win');
-  const altLeft = createKey('altLeft', 'Alt', 'Alt', 'Alt', 'Alt', 'Alt', 'Alt', 'Alt', 'Alt');
-  const space = createKey('space', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ');
-  const altRight = createKey('altRight', 'Alt', 'Alt', 'Alt', 'Alt', 'Alt', 'Alt', 'Alt', 'Alt' );
-  const arrowLeft = createKey('arrowLeft', '◄', '◄', '◄', '◄', '◄', '◄', '◄', '◄' );
-  const arrowDown = createKey('arrowDown', '▼', '▼', '▼', '▼', '▼', '▼', '▼', '▼');
-  const arrowRight = createKey('arrowRight', '►', '►', '►', '►', '►', '►', '►', '►');
-  const controlRight = createKey('controlRight', 'Ctrl', 'Ctrl', 'Ctrl', 'Ctrl', 'Ctrl', 'Ctrl', 'Ctrl', 'Ctrl');
+  const controlLeft = createKey('ControlLeft', 'Ctrl', 'Ctrl', 'Ctrl', 'Ctrl', 'Ctrl', 'Ctrl', 'Ctrl', 'Ctrl');
+  const metaLeft = createKey('MetaLeft', 'Win', 'Win', 'Win', 'Win', 'Win', 'Win', 'Win', 'Win');
+  const altLeft = createKey('AltLeft', 'Alt', 'Alt', 'Alt', 'Alt', 'Alt', 'Alt', 'Alt', 'Alt');
+  const space = createKey('Space', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ');
+  const altRight = createKey('AltRight', 'Alt', 'Alt', 'Alt', 'Alt', 'Alt', 'Alt', 'Alt', 'Alt' );
+  const arrowLeft = createKey('ArrowLeft', '◄', '◄', '◄', '◄', '◄', '◄', '◄', '◄' );
+  const arrowDown = createKey('ArrowDown', '▼', '▼', '▼', '▼', '▼', '▼', '▼', '▼');
+  const arrowRight = createKey('ArrowRight', '►', '►', '►', '►', '►', '►', '►', '►');
+  const controlRight = createKey('ControlRight', 'Ctrl', 'Ctrl', 'Ctrl', 'Ctrl', 'Ctrl', 'Ctrl', 'Ctrl', 'Ctrl');
 
   vkeyboardRow5.append(controlLeft, metaLeft, altLeft, space, altRight, arrowLeft, arrowDown, arrowRight, controlRight);
 
@@ -210,41 +210,123 @@ createElement();
 const textarea = document.querySelector('.vkeyboard__textarea');
 let text = '';
 
-const сlicking = document.onkeydown = function (event) {
+textarea.addEventListener('input', (event) => {
+  text = event.target.value;
+});
+
+document.onkeypress = function (event) {
+  event.preventDefault();
+}
+
+function delClassActiv(span) {
+  span.classList.add('vkeyboard__key_activ');
+  setTimeout(() => span.classList.remove('vkeyboard__key_activ'), 500); 
+}
+
+document.querySelector('.vkeyboard__body').onclick = function (event) {
+  if (event.target.classList[0] === 'vkeyboard__key' || event.target.closest('.vkeyboard__key')) {
+
+    let symv = '';
+
+    if (event.target.classList[1]) {
+      symv = event.target.classList[1];
+    }
+
+    if (event.target.closest('.vkeyboard__key')) {
+      symv = event.target.closest('.vkeyboard__key').classList[1];
+    }
+
+    const ev = new KeyboardEvent('keydown', { code: symv });
+
+    document.dispatchEvent(ev);
+  }
+}
+
+document.onkeydown = function (event) {
+
+  textarea.focus();
 
   let letter;
 
-  if (event.target.classList[1]) {
-    letter = event.target.classList[1];
-  }
-  else if (event.target.closest('.vkeyboard__key')) {
-    letter = event.target.closest('.vkeyboard__key').classList[1];
-  }
-  else {
-    letter = event.code;
-  }
-  console.log(letter)
-  letter = letter.replace(letter[0], letter[0].toLowerCase());
-    
+  letter = event.code;
+  
   let span = document.querySelector(`.${letter}`);
 
-  span.classList.add('vkeyboard__key_activ');
+  if (!span) {
+    return false;
+  } 
 
-  setTimeout(() => span.classList.remove('vkeyboard__key_activ'), 500);
+  delClassActiv(span);
 
-  if (letter === 'space') {
-    text += ' ';   
+  if (letter  === 'Backspace') { 
+    let position = textarea.selectionStart; 
+    const selectionStart = event.target.selectionStart;
+    const selectionEnd = event.target.selectionEnd;
+    
+    if (selectionStart === selectionEnd) {
+
+      text = text.slice(0, selectionStart - 1) + text.slice(selectionStart);
+
+      textarea.value = text;
+      textarea.selectionStart = textarea.selectionEnd = position - 1;
+    }
+    
+    return false
+  } 
+  else if (letter  === 'Space') { 
+    let position = textarea.selectionStart; 
+    const selectionStart = event.target.selectionStart;
+    const selectionEnd = event.target.selectionEnd;
+    
+    if (selectionStart === selectionEnd) {
+
+      text = text.slice(0, selectionStart) + ' ' + text.slice(selectionStart);
+
+      textarea.value = text;
+      textarea.selectionStart = textarea.selectionEnd = position + 1;
+    }
+    
+    return false
+  }
+  else if (letter  === 'Tab') { 
+    event.preventDefault();
+
+    let position = textarea.selectionStart; 
+    const selectionStart = event.target.selectionStart;
+    const selectionEnd = event.target.selectionEnd;
+    
+    if (selectionStart === selectionEnd) {
+
+      text = text.slice(0, selectionStart) + '    ' + text.slice(selectionStart);
+
+      textarea.value = text;
+      textarea.selectionStart = textarea.selectionEnd = position + 4;
+    }
+    
+    return false
+  }
+  else if (letter  === 'Enter') { 
+    text += '\n';
+  }
+  else if (letter  === 'Delete') { 
+    let position = textarea.selectionStart; 
+    const selectionStart = event.target.selectionStart;
+    const selectionEnd = event.target.selectionEnd;
+    
+    if (selectionStart === selectionEnd) {
+
+      text = text.slice(0, selectionStart) + text.slice(selectionStart + 1);
+
+      textarea.value = text;
+      textarea.selectionStart = textarea.selectionEnd = position;
+    }
+    
+    return false
   }
   else {
     letter = span.querySelector('span:not(.hidden)');  
     text += letter.innerText;
   }
 
-  textarea.innerText = text;   
-}
-
-document.querySelector('.vkeyboard__body').onclick = function (event) {
-  if (event.target.classList[0] === 'vkeyboard__key' || event.target.closest('.vkeyboard__key')) {
-    сlicking(event); 
-  }
+  textarea.value = text;   
 }
