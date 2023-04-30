@@ -206,6 +206,11 @@ const createElement = () => {
 
 createElement();
 
+
+let lang = localStorage.getItem('language');
+let activ = false;
+
+
 // Функции нажатий
 const textarea = document.querySelector('.vkeyboard__textarea');
 let text = '';
@@ -259,10 +264,12 @@ document.onkeydown = function (event) {
   delClassActiv(span);
 
   if (letter  === 'Backspace') { 
+    event.preventDefault();
+
     let position = textarea.selectionStart; 
-    const selectionStart = event.target.selectionStart;
-    const selectionEnd = event.target.selectionEnd;
-    
+    const selectionStart =  textarea.selectionStart;
+    const selectionEnd = textarea.selectionEnd;
+
     if (selectionStart === selectionEnd) {
 
       text = text.slice(0, selectionStart - 1) + text.slice(selectionStart);
@@ -271,12 +278,12 @@ document.onkeydown = function (event) {
       textarea.selectionStart = textarea.selectionEnd = position - 1;
     }
     
-    return false
+    return false;
   } 
   else if (letter  === 'Space') { 
     let position = textarea.selectionStart; 
-    const selectionStart = event.target.selectionStart;
-    const selectionEnd = event.target.selectionEnd;
+    const selectionStart = textarea.selectionStart;
+    const selectionEnd = textarea.selectionEnd;
     
     if (selectionStart === selectionEnd) {
 
@@ -292,8 +299,8 @@ document.onkeydown = function (event) {
     event.preventDefault();
 
     let position = textarea.selectionStart; 
-    const selectionStart = event.target.selectionStart;
-    const selectionEnd = event.target.selectionEnd;
+    const selectionStart = textarea.selectionStart;
+    const selectionEnd = textarea.selectionEnd;
     
     if (selectionStart === selectionEnd) {
 
@@ -306,12 +313,26 @@ document.onkeydown = function (event) {
     return false
   }
   else if (letter  === 'Enter') { 
-    text += '\n';
+    let position = textarea.selectionStart; 
+    const selectionStart = textarea.selectionStart;
+    const selectionEnd = textarea.selectionEnd;
+    
+    if (selectionStart === selectionEnd) {
+
+      text = text.slice(0, selectionStart) + '\n' + text.slice(selectionStart);
+
+      textarea.value = text;
+      textarea.selectionStart = textarea.selectionEnd = position + 1;
+    }
+    
+    return false
   }
   else if (letter  === 'Delete') { 
+    event.preventDefault();
+
     let position = textarea.selectionStart; 
-    const selectionStart = event.target.selectionStart;
-    const selectionEnd = event.target.selectionEnd;
+    const selectionStart = textarea.selectionStart;
+    const selectionEnd = textarea.selectionEnd;
     
     if (selectionStart === selectionEnd) {
 
@@ -323,6 +344,29 @@ document.onkeydown = function (event) {
     
     return false
   }
+  else if (letter  === 'ArrowLeft') {
+    let position = textarea.selectionStart;
+    textarea.selectionStart = textarea.selectionEnd = position - 1;
+    
+    return false;
+  }
+  else if (letter  === 'ArrowRight') {
+    let position = textarea.selectionStart;
+    textarea.selectionStart = textarea.selectionEnd = position + 1;
+    
+    return false;
+  }
+  else if (letter  === 'ArrowDown') {
+    textarea.selectionStart = textarea.selectionEnd = text.length;  
+    return false;
+  }
+  else if (letter  === 'ArrowUp') {
+    textarea.selectionStart = textarea.selectionEnd = 0;   
+    return false;
+  }
+  else if (letter  === 'MetaLeft' || letter  === 'ControlLeft' || letter  === 'AltLeft' || letter  === 'CapsLock') {
+    return false;
+  }
   else {
     letter = span.querySelector('span:not(.hidden)');  
     text += letter.innerText;
@@ -330,3 +374,156 @@ document.onkeydown = function (event) {
 
   textarea.value = text;   
 }
+
+
+document.addEventListener('keydown', function(event) {
+  if (event.ctrlKey && event.altKey) {
+    if (lang === 'rus') {
+      vKeyboard.querySelectorAll('.rus').forEach(item => {
+        item.classList.add('hidden');
+        item.querySelector('.caseDown').classList.add('hidden');
+        item.querySelector('.caps').classList.add('hidden');
+      });
+      vKeyboard.querySelectorAll('.eng').forEach(item => {
+        item.classList.remove('hidden');
+        if (activ === true) {
+          item.querySelector('.caseDown').classList.add('hidden');
+          item.querySelector('.caps').classList.remove('hidden');
+        }
+        else {
+          item.querySelector('.caseDown').classList.remove('hidden');
+          item.querySelector('.caps').classList.add('hidden');
+        }
+      });
+      lang = 'eng';
+      localStorage.setItem('language', 'eng');
+      console.log(lang);
+    }
+    else if (lang === 'eng' || lang === null) {
+      vKeyboard.querySelectorAll('.eng').forEach(item => {
+        item.classList.add('hidden');
+        item.querySelector('.caseDown').classList.add('hidden');
+        item.querySelector('.caps').classList.add('hidden');
+      });
+      vKeyboard.querySelectorAll('.rus').forEach(item => {
+        item.classList.remove('hidden');
+        if (activ === true) {
+          item.querySelector('.caseDown').classList.add('hidden');
+          item.querySelector('.caps').classList.remove('hidden');
+        }
+        else {
+          item.querySelector('.caseDown').classList.remove('hidden');
+          item.querySelector('.caps').classList.add('hidden');
+        }
+      });
+      lang = 'rus';
+      localStorage.setItem('language', 'rus');
+      console.log(lang);
+    } 
+  }
+});
+
+
+document.addEventListener('keydown', function(event) {
+  
+  if  (event.code === 'CapsLock') {
+    if (lang === 'eng' && activ === false || lang === null && activ === false) {
+      vKeyboard.querySelectorAll('.eng').forEach(item => {
+        item.classList.remove('hidden');
+        item.querySelector('.caseDown').classList.add('hidden');
+        item.querySelector('.caps').classList.remove('hidden');      
+      });
+      vKeyboard.querySelectorAll('.rus').forEach(item => {
+        item.classList.add('hidden');
+        item.querySelector('.caseDown').classList.add('hidden');
+        item.querySelector('.caps').classList.add('hidden');
+      });
+      activ = true;
+    }
+    else if (lang === 'eng' && activ === true || lang === null && activ === true) {
+      vKeyboard.querySelectorAll('.eng').forEach(item => {
+        item.classList.remove('hidden');
+        item.querySelector('.caseDown').classList.remove('hidden');
+        item.querySelector('.caps').classList.add('hidden');      
+      });
+      vKeyboard.querySelectorAll('.rus').forEach(item => {
+        item.classList.add('hidden');
+        item.querySelector('.caseDown').classList.add('hidden');
+        item.querySelector('.caps').classList.add('hidden');
+      });
+      activ = false;
+    }
+    else if (lang === 'rus' && activ === false) {
+      vKeyboard.querySelectorAll('.rus').forEach(item => {
+        item.classList.remove('hidden');
+        item.querySelector('.caseDown').classList.add('hidden');
+        item.querySelector('.caps').classList.remove('hidden');      
+      });
+      vKeyboard.querySelectorAll('.eng').forEach(item => {
+        item.classList.add('hidden');
+        item.querySelector('.caseDown').classList.add('hidden');
+        item.querySelector('.caps').classList.add('hidden');
+      });
+      activ = true;
+    }
+    else if (lang === 'rus' && activ === true) {
+      vKeyboard.querySelectorAll('.rus').forEach(item => {
+        item.classList.remove('hidden');
+        item.querySelector('.caseDown').classList.remove('hidden');
+        item.querySelector('.caps').classList.add('hidden');      
+      });
+      vKeyboard.querySelectorAll('.eng').forEach(item => {
+        item.classList.add('hidden');
+        item.querySelector('.caseDown').classList.add('hidden');
+        item.querySelector('.caps').classList.add('hidden');
+      });
+      activ = false;
+    }
+  }
+});
+
+
+window.addEventListener('load', function() {
+  let lang = localStorage.getItem('language');
+  //console.log(activ);
+  //console.log(lang);
+  if (lang === 'rus') {
+    vKeyboard.querySelectorAll('.eng').forEach(item => {
+      item.classList.add('hidden');
+      item.querySelector('.caseDown').classList.add('hidden');
+      item.querySelector('.caps').classList.add('hidden');
+    });
+    vKeyboard.querySelectorAll('.rus').forEach(item => {
+      item.classList.remove('hidden');
+      if (activ === true) {
+        item.querySelector('.caseDown').classList.add('hidden');
+        item.querySelector('.caps').classList.remove('hidden');
+      }
+      else {
+        item.querySelector('.caseDown').classList.remove('hidden');
+        item.querySelector('.caps').classList.add('hidden');
+      }
+    });
+  } 
+  else if (lang === null) lang === 'eng';
+  else {
+    vKeyboard.querySelectorAll('.rus').forEach(item => {
+      item.classList.add('hidden');
+      item.querySelector('.caseDown').classList.add('hidden');
+      item.querySelector('.caps').classList.add('hidden');
+    });
+    vKeyboard.querySelectorAll('.eng').forEach(item => {
+      item.classList.remove('hidden');
+      if (activ === true) {
+        item.querySelector('.caseDown').classList.add('hidden');
+        item.querySelector('.caps').classList.remove('hidden');
+      }
+      else {
+        item.querySelector('.caseDown').classList.remove('hidden');
+        item.querySelector('.caps').classList.add('hidden');
+      }
+    });
+  }
+  //console.log(activ);
+ // console.log(lang);
+}); 
