@@ -224,9 +224,9 @@ document.onkeypress = function (event) {
   event.preventDefault();
 }
 
-function delClassActiv(span) {
+function delClassActiv(span) {  
   span.classList.add('vkeyboard__key_activ');
-  setTimeout(() => span.classList.remove('vkeyboard__key_activ'), 500); 
+  setTimeout(() => span.classList.remove('vkeyboard__key_activ'), 200); 
 }
 
 document.querySelector('.vkeyboard__body').onclick = function (event) {
@@ -255,14 +255,17 @@ document.onkeydown = function (event) {
   let letter;
 
   letter = event.code;
+
+  if (letter === 'ShiftLeft') return;
   
   let span = document.querySelector(`.${letter}`);
 
   if (!span) {
     return false;
   } 
-
+  
   if (letter !== 'CapsLock') delClassActiv(span);
+  
 
   if (letter  === 'Backspace') { 
     event.preventDefault();
@@ -370,6 +373,7 @@ document.onkeydown = function (event) {
     return false;
   }
   else if (letter  === 'CapsLock') {
+    if (event.repeat) { return; };
     span.classList.toggle('vkeyboard__key_activ');
 
     return false;
@@ -389,6 +393,7 @@ document.onkeydown = function (event) {
 
 document.addEventListener('keydown', function(event) {
   if (event.ctrlKey && event.altKey) {
+    if (event.repeat) { return false; };
     if (lang === 'rus') {
       vKeyboard.querySelectorAll('.rus').forEach(item => {
         item.classList.add('hidden');
@@ -435,8 +440,8 @@ document.addEventListener('keydown', function(event) {
 
 
 document.addEventListener('keydown', function(event) {
-  
   if  (event.code === 'CapsLock') {
+    if (event.repeat) { return false; };
     if (lang === 'eng' && activ === false || lang === null && activ === false) {
       vKeyboard.querySelectorAll('.eng').forEach(item => {
         item.classList.remove('hidden');
@@ -538,29 +543,32 @@ window.addEventListener('load', function() {
 
 document.addEventListener('keydown', function(event) {
   if (event.getModifierState('Shift')) {
-    
+    vKeyboard.querySelector('.ShiftLeft').classList.add('vkeyboard__key_activ');
+
     if (!shiftActive) {
-     
+      if (event.repeat) { preventDefault() };
+      
       const ev = new KeyboardEvent('keydown', { code: 'CapsLock' });
 
       document.dispatchEvent(ev);
-      vKeyboard.querySelector('.ShiftLeft').classList.add('vkeyboard__key_activ');
       vKeyboard.querySelector('.CapsLock').classList.toggle('vkeyboard__key_activ');
+      
       shiftActive = true;
     }
   }
 });
 
 document.addEventListener('keyup', function(event) {
+
   if (event.key === 'Shift') {
-    
+    vKeyboard.querySelector('.ShiftLeft').classList.remove('vkeyboard__key_activ');
     if (shiftActive) {
       
       const ev = new KeyboardEvent('keydown', { code: 'CapsLock' });
-
+      
       document.dispatchEvent(ev);
-      vKeyboard.querySelector('.ShiftLeft').classList.remove('vkeyboard__key_activ');
       vKeyboard.querySelector('.CapsLock').classList.toggle('vkeyboard__key_activ');
+      
       shiftActive = false;
     }
   }

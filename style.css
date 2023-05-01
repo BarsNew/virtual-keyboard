@@ -87,14 +87,37 @@
   background-color: #000;
 }
 
+/*
 .vkeyboard__key:hover {
   background-color: #fff;
   color: #000;
 }
+*/
 
 .vkeyboard__key_activ {
   background-color: greenyellow !important;
   color: #000;
   /*border-radius: 20px;*/
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-name: blink;
+}  
+
+.vkeyboard__key:active {
+  background-color: greenyellow;
+  color: #000;
 } 
+
+@keyframes blink {
+  0% {
+    background-color: greenyellow;
+  }
+  50% {
+    background-color: greenyellow;
+  }
+  100% {
+    background-color: greenyellow;
+  }
+}
 
