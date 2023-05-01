@@ -76,7 +76,7 @@ const createElement = () => {
 
   const title = document.createElement('p');
 
-  title.innerText = 'RSS Виртуальная клавиатура';
+  title.innerText = 'Виртуальная клавиатура';
   title.classList.add('vkeyboard__title');
 
   const textarea = document.createElement('textarea');
@@ -126,7 +126,7 @@ const createElement = () => {
   const bracketLeft = createKey('BracketLeft', '[','{','[','{','х','Х','Х','х');
   const bracketRight = createKey('VracketRight', ']','}',']','}','ъ','Ъ','Ъ','ъ');
   const backslash = createKey('Vackslash', '\\','|','\\','|','\\','/','\\','/');
-  const del = createKey('Delete');
+  const del = createKey('Delete', 'Del', 'Del', 'Del', 'Del', 'Del', 'Del', 'Del', 'Del');
 
   vkeyboardRow2.append(tab, keyQ, keyW, keyE, keyR, keyT, keyY, keyU, keyI, keyO, keyP, bracketLeft, bracketRight, backslash, del);
 
@@ -152,7 +152,7 @@ const createElement = () => {
   const vkeyboardRow4 = document.createElement('div');
   vkeyboardRow4.classList.add('vkeyboard__row')
 
-  const shiftLeft = createKey('shiftLeft', 'Shift', 'Shift', 'Shift', 'Shift', 'Shift', 'Shift', 'Shift', 'Shift');
+  const shiftLeft = createKey('ShiftLeft', 'Shift', 'Shift', 'Shift', 'Shift', 'Shift', 'Shift', 'Shift', 'Shift');
   const keyZ = createKey('KeyZ', 'z','Z','Z','z','я','Я','Я','я');
   const keyX= createKey('KeyX', 'x','X','X','x','ч','Ч','Ч','ч');
   const keyC = createKey('KeyC', 'c','C','C','c','с','С','С','с');
@@ -174,7 +174,7 @@ const createElement = () => {
   const controlLeft = createKey('ControlLeft', 'Ctrl', 'Ctrl', 'Ctrl', 'Ctrl', 'Ctrl', 'Ctrl', 'Ctrl', 'Ctrl');
   const metaLeft = createKey('MetaLeft', 'Win', 'Win', 'Win', 'Win', 'Win', 'Win', 'Win', 'Win');
   const altLeft = createKey('AltLeft', 'Alt', 'Alt', 'Alt', 'Alt', 'Alt', 'Alt', 'Alt', 'Alt');
-  const space = createKey('Space', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ');
+  const space = createKey('Space', '____ ____ ____', '____ ____ ____', '____ ____ ____', '____ ____ ____', '____ ____ ____', '____ ____ ____', '____ ____ ____', '____ ____ ____');
   const altRight = createKey('AltRight', 'Alt', 'Alt', 'Alt', 'Alt', 'Alt', 'Alt', 'Alt', 'Alt' );
   const arrowLeft = createKey('ArrowLeft', '◄', '◄', '◄', '◄', '◄', '◄', '◄', '◄' );
   const arrowDown = createKey('ArrowDown', '▼', '▼', '▼', '▼', '▼', '▼', '▼', '▼');
@@ -366,7 +366,7 @@ document.onkeydown = function (event) {
     textarea.selectionStart = textarea.selectionEnd = 0;   
     return false;
   }
-  else if (letter  === 'MetaLeft' || letter  === 'ControlLeft' || letter  === 'AltLeft') {
+  else if (letter  === 'MetaLeft' || letter  === 'ControlLeft' || letter  === 'AltLeft' || letter  === 'ShiftLeft' || letter  === 'AltRight' || letter  === 'ControlRight' || letter === 'ShiftRight') {
     return false;
   }
   else if (letter  === 'CapsLock') {
@@ -377,7 +377,7 @@ document.onkeydown = function (event) {
   else {
     let position = textarea.selectionStart; 
     const selectionStart = textarea.selectionStart;
-    const selectionEnd = textarea.selectionEnd;
+    //const selectionEnd = textarea.selectionEnd;
 
     letter = span.querySelector('span:not(.hidden)');  
     text = text.slice(0, selectionStart) + letter.innerText + text.slice(selectionStart);
@@ -538,26 +538,30 @@ window.addEventListener('load', function() {
 
 document.addEventListener('keydown', function(event) {
   if (event.getModifierState('Shift')) {
-    vKeyboard.querySelector('.shiftLeft').classList.add('vkeyboard__key_activ');
+    
     if (!shiftActive) {
+     
       const ev = new KeyboardEvent('keydown', { code: 'CapsLock' });
 
       document.dispatchEvent(ev);
-      shiftActive = true;
+      vKeyboard.querySelector('.ShiftLeft').classList.add('vkeyboard__key_activ');
       vKeyboard.querySelector('.CapsLock').classList.toggle('vkeyboard__key_activ');
+      shiftActive = true;
     }
   }
 });
 
 document.addEventListener('keyup', function(event) {
   if (event.key === 'Shift') {
-    vKeyboard.querySelector('.shiftLeft').classList.remove('vkeyboard__key_activ');
+    
     if (shiftActive) {
+      
       const ev = new KeyboardEvent('keydown', { code: 'CapsLock' });
 
       document.dispatchEvent(ev);
-      shiftActive = false;
+      vKeyboard.querySelector('.ShiftLeft').classList.remove('vkeyboard__key_activ');
       vKeyboard.querySelector('.CapsLock').classList.toggle('vkeyboard__key_activ');
+      shiftActive = false;
     }
   }
 });
