@@ -1,0 +1,123 @@
+.hidden {
+  display: none;
+}
+
+.vkeyboard {
+  text-align: center;
+}
+
+.vkeyboard__title {
+  font-size: 25px;
+}
+
+.vkeyboard__textarea {
+  width: 818px;
+  height: 150px;
+}
+
+.vkeyboard__body {
+  width: 800px;
+  background-color: gray;
+  padding: 10px;
+  border: 3px solid #000;
+  border-radius: 5px;
+  margin: 5px auto;
+}
+
+.vkeyboard__row {
+  display: flex;
+  gap: 10px;
+  justify-content: space-between;
+  margin: 10px 0px;
+}
+
+.vkeyboard__key {
+  width: 40px;
+  height: 40px;
+  background: #444;
+  text-align: center;
+  color: #fff;
+  border-radius: 3px;
+  cursor: pointer;
+  line-height: 40px;
+  margin: 0;
+}
+
+.CapsLock,
+.Enter,
+.ShiftLeft,
+.ShiftRight {
+  width: 100px;
+}
+
+.Space {
+  width: 357px;
+}
+
+.Backspace {
+  width: 110px;
+}
+
+.ControlLeft,
+.ControlRight {
+  width: 45px;
+}
+
+.Delete,
+.Tab {
+  width: 47px;
+}
+
+.MetaLeft,
+.AltLeft,
+.AltRight,
+.ArrowUp,
+.ArrowLeft,
+.ArrowDown,
+.ArrowRight,
+.Delete,
+.Tab,
+.ControlLeft,
+.ControlRight,
+.Backspace,
+.CapsLock,
+.Enter,
+.ShiftLeft,
+.ShiftRight {
+  background-color: #000;
+}
+
+/*
+.vkeyboard__key:hover {
+  background-color: #fff;
+  color: #000;
+}
+*/
+
+.vkeyboard__key_activ {
+  background-color: greenyellow !important;
+  color: #000;
+  /*border-radius: 20px;*/
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  animation-name: blink;
+}  
+
+.vkeyboard__key:active {
+  background-color: greenyellow;
+  color: #000;
+} 
+
+@keyframes blink {
+  0% {
+    background-color: greenyellow;
+  }
+  50% {
+    background-color: greenyellow;
+  }
+  100% {
+    background-color: greenyellow;
+  }
+}
+
