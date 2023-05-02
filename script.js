@@ -91,7 +91,7 @@ const createElement = () => {
 
   vkeyboardRow1.classList.add('vkeyboard__row');
 
-  const backquote = createKey('Backquote', '`','~','`','~','ё','Ё','Ё','ё');
+  const backquote = createKey('Backquote', '`','~','`','~','ё','Ё','Ё','Ё');
   const digit1 = createKey('Digit1', '1','!','1','!','1','!','1','!');
   const digit2 = createKey('Digit2', '2','"','2','"','2','@','2','@');
   const digit3 = createKey('Digit3', '3','№','3','№','3','#','3','#');
@@ -123,8 +123,8 @@ const createElement = () => {
   const keyI = createKey('KeyI', 'i','I','I','i','ш','Ш','Ш','ш');
   const keyO = createKey('KeyO', 'o','O','O','o','щ','Щ','Щ','щ');
   const keyP = createKey('KeyP', 'p','P','P','p','з','З','З','з');
-  const bracketLeft = createKey('BracketLeft', '[','{','[','{','х','Х','Х','х');
-  const bracketRight = createKey('VracketRight', ']','}',']','}','ъ','Ъ','Ъ','ъ');
+  const bracketLeft = createKey('BracketLeft', '[','{','[','{','х','Х','Х','Х');
+  const bracketRight = createKey('VracketRight', ']','}',']','}','ъ','Ъ','Ъ','Ъ');
   const backslash = createKey('Vackslash', '\\','|','\\','|','\\','/','\\','/');
   const del = createKey('Delete', 'Del', 'Del', 'Del', 'Del', 'Del', 'Del', 'Del', 'Del');
 
@@ -143,8 +143,8 @@ const createElement = () => {
   const keyJ = createKey('KeyJ', 'j','J','J','j','о','О','О','о');
   const keyK = createKey('KeyK', 'k','K','K','k','л','Л','Л','л');
   const keyL = createKey('KeyL', 'l','L','L','l','д','Д','Д','д');
-  const semicolon = createKey('Semicolon', ';',':',';',':','ж','Ж','Ж','ж');
-  const quote = createKey('Quote', "'",'"',"'",'"','э','Э','Э','э');
+  const semicolon = createKey('Semicolon', ';',':',';',':','ж','Ж','Ж','Ж');
+  const quote = createKey('Quote', "'",'"',"'",'"','э','Э','Э','Э');
   const enter = createKey('Enter');
 
   vkeyboardRow3.append(capsLock, keyA, keyS, keyD, keyF, keyG, keyH, keyJ, keyK, keyL, semicolon, quote, enter);
@@ -160,8 +160,8 @@ const createElement = () => {
   const keyB = createKey('KeyB', 'b','B','B','b','и','И','И','и');
   const keyN = createKey('KeyN', 'n','N','N','n','т','Т','Т','т');
   const keyM = createKey('KeyM', 'm','M','M','m','ь','Ь','Ь','ь');
-  const comma = createKey('Comma', ',', '<', ',','<','б','Б','Б','б');
-  const period = createKey('Period', '.','>','.','>','ю','Ю','Ю','ю');
+  const comma = createKey('Comma', ',', '<', ',','<','б','Б','Б','Б');
+  const period = createKey('Period', '.','>','.','>','ю','Ю','Ю','Ю');
   const slash = createKey('Slash', '/','?','/','?','.',',','.',',');
   const arrowUp = createKey('ArrowUp', '▲', '▲', '▲', '▲', '▲', '▲', '▲', '▲');
   const shiftRight = createKey('ShiftRight', 'Shift', 'Shift', 'Shift', 'Shift', 'Shift', 'Shift', 'Shift', 'Shift');
@@ -209,7 +209,7 @@ createElement();
 
 let lang = localStorage.getItem('language');
 let activ = false;
-let capsLockActive = false;
+let capsLockActive = true;
 let shiftActive = false;
 
 // Функции нажатий
@@ -219,6 +219,10 @@ let text = '';
 textarea.addEventListener('input', (event) => {
   text = event.target.value;
 });
+
+function toggleCaps() {
+  capsLockActive = !capsLockActive;
+}
 
 document.onkeypress = function (event) {
   event.preventDefault();
@@ -442,6 +446,7 @@ document.addEventListener('keydown', function(event) {
 document.addEventListener('keydown', function(event) {
   if  (event.code === 'CapsLock') {
     if (event.repeat) { return false; };
+    toggleCaps();
     if (lang === 'eng' && activ === false || lang === null && activ === false) {
       vKeyboard.querySelectorAll('.eng').forEach(item => {
         item.classList.remove('hidden');
@@ -555,7 +560,71 @@ document.addEventListener('keydown', function(event) {
       
       shiftActive = true;
     }
+    
+  if (lang === 'rus') {
+    vKeyboard.querySelectorAll('.eng').forEach(item => {
+      if (item.closest('.Digit1') || item.closest('.Digit2') || item.closest('.Digit3') || item.closest('.Digit4') || item.closest('.Digit5') || item.closest('.Digit6') || item.closest('.Digit7') || item.closest('.Digit8') || item.closest('.Digit9') || item.closest('.Digit0') || item.closest('.Backquote') || item.closest('.Minus') || item.closest('.Equal') || item.closest('.BracketLeft') || item.closest('.VracketRight') || item.closest('.Vackslash') || item.closest('.Semicolon') || item.closest('.Semicolon') || item.closest('.Quote') || item.closest('.Comma') || item.closest('.Period') || item.closest('.Slash')) { 
+        item.classList.add('hidden');
+        item.querySelector('.caseDown').classList.add('hidden');
+        item.querySelector('.caseUp').classList.add('hidden');
+        item.querySelector('.caps').classList.add('hidden');
+        item.querySelector('.shiftCaps').classList.add('hidden');
+      }
+    }); console.log(capsLockActive) 
+    vKeyboard.querySelectorAll('.rus').forEach(item => {   
+      if (capsLockActive === false) {    
+        if (item.closest('.Digit1') || item.closest('.Digit2') || item.closest('.Digit3') || item.closest('.Digit4') || item.closest('.Digit5') || item.closest('.Digit6') || item.closest('.Digit7') || item.closest('.Digit8') || item.closest('.Digit9') || item.closest('.Digit0') || item.closest('.Backquote') || item.closest('.Minus') || item.closest('.Equal') || item.closest('.BracketLeft') || item.closest('.VracketRight') || item.closest('.Vackslash') || item.closest('.Semicolon') || item.closest('.Semicolon') || item.closest('.Quote') || item.closest('.Comma') || item.closest('.Period') || item.closest('.Slash')) { 
+          item.classList.remove('hidden');
+          item.querySelector('.caseDown').classList.add('hidden');
+          item.querySelector('.caseUp').classList.add('hidden');
+          item.querySelector('.caps').classList.add('hidden');
+          item.querySelector('.shiftCaps').classList.remove('hidden');
+        }
+      }
+      else {
+        if (item.closest('.Digit1') || item.closest('.Digit2') || item.closest('.Digit3') || item.closest('.Digit4') || item.closest('.Digit5') || item.closest('.Digit6') || item.closest('.Digit7') || item.closest('.Digit8') || item.closest('.Digit9') || item.closest('.Digit0') || item.closest('.Backquote') || item.closest('.Minus') || item.closest('.Equal') || item.closest('.BracketLeft') || item.closest('.VracketRight') || item.closest('.Vackslash') || item.closest('.Semicolon') || item.closest('.Semicolon') || item.closest('.Quote') || item.closest('.Comma') || item.closest('.Period') || item.closest('.Slash')) { 
+          item.classList.remove('hidden');
+          item.querySelector('.caseDown').classList.remove('hidden');
+          item.querySelector('.caseUp').classList.add('hidden');
+          item.querySelector('.caps').classList.add('hidden');
+          item.querySelector('.shiftCaps').classList.add('hidden');
+        }
+      }
+    });
   }
+
+  if (lang === 'eng') {
+    vKeyboard.querySelectorAll('.rus').forEach(item => {
+      if (item.closest('.Digit1') || item.closest('.Digit2') || item.closest('.Digit3') || item.closest('.Digit4') || item.closest('.Digit5') || item.closest('.Digit6') || item.closest('.Digit7') || item.closest('.Digit8') || item.closest('.Digit9') || item.closest('.Digit0') || item.closest('.Backquote') || item.closest('.Minus') || item.closest('.Equal') || item.closest('.BracketLeft') || item.closest('.VracketRight') || item.closest('.Vackslash') || item.closest('.Semicolon') || item.closest('.Semicolon') || item.closest('.Quote') || item.closest('.Comma') || item.closest('.Period') || item.closest('.Slash')) { 
+        item.classList.add('hidden');
+        item.querySelector('.caseDown').classList.add('hidden');
+        item.querySelector('.caseUp').classList.add('hidden');
+        item.querySelector('.caps').classList.add('hidden');
+        item.querySelector('.shiftCaps').classList.add('hidden');
+      }
+    });
+    vKeyboard.querySelectorAll('.eng').forEach(item => {
+      if (capsLockActive === false) {
+        if (item.closest('.Digit1') || item.closest('.Digit2') || item.closest('.Digit3') || item.closest('.Digit4') || item.closest('.Digit5') || item.closest('.Digit6') || item.closest('.Digit7') || item.closest('.Digit8') || item.closest('.Digit9') || item.closest('.Digit0') || item.closest('.Backquote') || item.closest('.Minus') || item.closest('.Equal') || item.closest('.BracketLeft') || item.closest('.VracketRight') || item.closest('.Vackslash') || item.closest('.Semicolon') || item.closest('.Semicolon') || item.closest('.Quote') || item.closest('.Comma') || item.closest('.Period') || item.closest('.Slash')) { 
+          item.classList.remove('hidden');
+          item.querySelector('.caseDown').classList.add('hidden');
+          item.querySelector('.caseUp').classList.add('hidden');
+          item.querySelector('.caps').classList.add('hidden');
+          item.querySelector('.shiftCaps').classList.remove('hidden');
+        }
+      } 
+      else {
+        if (item.closest('.Digit1') || item.closest('.Digit2') || item.closest('.Digit3') || item.closest('.Digit4') || item.closest('.Digit5') || item.closest('.Digit6') || item.closest('.Digit7') || item.closest('.Digit8') || item.closest('.Digit9') || item.closest('.Digit0') || item.closest('.Backquote') || item.closest('.Minus') || item.closest('.Equal') || item.closest('.BracketLeft') || item.closest('.VracketRight') || item.closest('.Vackslash') || item.closest('.Semicolon') || item.closest('.Semicolon') || item.closest('.Quote') || item.closest('.Comma') || item.closest('.Period') || item.closest('.Slash')) { 
+          item.classList.remove('hidden');
+          item.querySelector('.caseDown').classList.remove('hidden');
+          item.querySelector('.caseUp').classList.add('hidden');
+          item.querySelector('.caps').classList.add('hidden');
+          item.querySelector('.shiftCaps').classList.add('hidden');
+        }
+      }  
+    });
+  }
+}
 });
 
 document.addEventListener('keyup', function(event) {
@@ -571,5 +640,74 @@ document.addEventListener('keyup', function(event) {
       
       shiftActive = false;
     }
+ 
+
+  if (lang === 'rus') {
+    vKeyboard.querySelectorAll('.eng').forEach(item => {
+      if (item.closest('.Digit1') || item.closest('.Digit2') || item.closest('.Digit3') || item.closest('.Digit4') || item.closest('.Digit5') || item.closest('.Digit6') || item.closest('.Digit7') || item.closest('.Digit8') || item.closest('.Digit9') || item.closest('.Digit0') || item.closest('.Backquote') || item.closest('.Minus') || item.closest('.Equal') || item.closest('.BracketLeft') || item.closest('.VracketRight') || item.closest('.Vackslash') || item.closest('.Semicolon') || item.closest('.Semicolon') || item.closest('.Quote') || item.closest('.Comma') || item.closest('.Period') || item.closest('.Slash')) { 
+        item.classList.add('hidden');
+        item.querySelector('.caseDown').classList.add('hidden');
+        item.querySelector('.caseUp').classList.add('hidden');
+        item.querySelector('.caps').classList.add('hidden');
+        item.querySelector('.shiftCaps').classList.add('hidden');
+      }
+    });
+    if (capsLockActive === true) {
+      vKeyboard.querySelectorAll('.rus').forEach(item => {
+        if (item.closest('.Digit1') || item.closest('.Digit2') || item.closest('.Digit3') || item.closest('.Digit4') || item.closest('.Digit5') || item.closest('.Digit6') || item.closest('.Digit7') || item.closest('.Digit8') || item.closest('.Digit9') || item.closest('.Digit0') || item.closest('.Backquote') || item.closest('.Minus') || item.closest('.Equal') || item.closest('.BracketLeft') || item.closest('.VracketRight') || item.closest('.Vackslash') || item.closest('.Semicolon') || item.closest('.Semicolon') || item.closest('.Quote') || item.closest('.Comma') || item.closest('.Period') || item.closest('.Slash')) {  
+          item.classList.remove('hidden');
+          item.querySelector('.caseDown').classList.remove('hidden');
+          item.querySelector('.caseUp').classList.add('hidden');
+          item.querySelector('.caps').classList.add('hidden');
+          item.querySelector('.shiftCaps').classList.add('hidden');
+        }
+      });
+    }
+    else {
+      vKeyboard.querySelectorAll('.rus').forEach(item => {
+        if (item.closest('.Digit1') || item.closest('.Digit2') || item.closest('.Digit3') || item.closest('.Digit4') || item.closest('.Digit5') || item.closest('.Digit6') || item.closest('.Digit7') || item.closest('.Digit8') || item.closest('.Digit9') || item.closest('.Digit0') || item.closest('.Backquote') || item.closest('.Minus') || item.closest('.Equal') || item.closest('.BracketLeft') || item.closest('.VracketRight') || item.closest('.Vackslash') || item.closest('.Semicolon') || item.closest('.Semicolon') || item.closest('.Quote') || item.closest('.Comma') || item.closest('.Period') || item.closest('.Slash')) {  
+          item.classList.remove('hidden');
+          item.querySelector('.caseDown').classList.add('hidden');
+          item.querySelector('.caseUp').classList.add('hidden');
+          item.querySelector('.caps').classList.remove('hidden');
+          item.querySelector('.shiftCaps').classList.add('hidden');
+        }
+      });
+    }
   }
+
+  if (lang === 'eng') {
+    vKeyboard.querySelectorAll('.rus').forEach(item => {
+      if (item.closest('.Digit1') || item.closest('.Digit2') || item.closest('.Digit3') || item.closest('.Digit4') || item.closest('.Digit5') || item.closest('.Digit6') || item.closest('.Digit7') || item.closest('.Digit8') || item.closest('.Digit9') || item.closest('.Digit0') || item.closest('.Backquote') || item.closest('.Minus') || item.closest('.Equal') || item.closest('.BracketLeft') || item.closest('.VracketRight') || item.closest('.Vackslash') || item.closest('.Semicolon') || item.closest('.Semicolon') || item.closest('.Quote') || item.closest('.Comma') || item.closest('.Period') || item.closest('.Slash')) {  
+        item.classList.add('hidden');
+        item.querySelector('.caseDown').classList.add('hidden');
+        item.querySelector('.caseUp').classList.add('hidden');
+        item.querySelector('.caps').classList.add('hidden');
+        item.querySelector('.shiftCaps').classList.add('hidden');
+      } 
+    });
+    if (capsLockActive === true) {
+      vKeyboard.querySelectorAll('.eng').forEach(item => {
+        if (item.closest('.Digit1') || item.closest('.Digit2') || item.closest('.Digit3') || item.closest('.Digit4') || item.closest('.Digit5') || item.closest('.Digit6') || item.closest('.Digit7') || item.closest('.Digit8') || item.closest('.Digit9') || item.closest('.Digit0') || item.closest('.Backquote') || item.closest('.Minus') || item.closest('.Equal') || item.closest('.BracketLeft') || item.closest('.VracketRight') || item.closest('.Vackslash') || item.closest('.Semicolon') || item.closest('.Semicolon') || item.closest('.Quote') || item.closest('.Comma') || item.closest('.Period') || item.closest('.Slash')) { 
+          item.classList.remove('hidden');
+          item.querySelector('.caseDown').classList.remove('hidden');
+          item.querySelector('.caseUp').classList.add('hidden');
+          item.querySelector('.caps').classList.add('hidden');
+          item.querySelector('.shiftCaps').classList.add('hidden');
+        }    
+      });
+    }
+    else {
+      vKeyboard.querySelectorAll('.eng').forEach(item => {
+        if (item.closest('.Digit1') || item.closest('.Digit2') || item.closest('.Digit3') || item.closest('.Digit4') || item.closest('.Digit5') || item.closest('.Digit6') || item.closest('.Digit7') || item.closest('.Digit8') || item.closest('.Digit9') || item.closest('.Digit0') || item.closest('.Backquote') || item.closest('.Minus') || item.closest('.Equal') || item.closest('.BracketLeft') || item.closest('.VracketRight') || item.closest('.Vackslash') || item.closest('.Semicolon') || item.closest('.Semicolon') || item.closest('.Quote') || item.closest('.Comma') || item.closest('.Period') || item.closest('.Slash')) { 
+          item.classList.remove('hidden');
+          item.querySelector('.caseDown').classList.add('hidden');
+          item.querySelector('.caseUp').classList.add('hidden');
+          item.querySelector('.caps').classList.remove('hidden');
+          item.querySelector('.shiftCaps').classList.add('hidden');
+        }    
+      });
+    }
+  }
+}
 });
